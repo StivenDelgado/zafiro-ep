@@ -66,7 +66,7 @@ const Index = () => {
 
   return (
     <div className="scroll-smooth">
-      <div className="snap-y snap-mandatory h-screen overflow-y-auto">
+      <div className="snap-y snap-mandatory h-screen overflow-y-scroll [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         <Hero />
         
         {tracks.map((track, index) => (

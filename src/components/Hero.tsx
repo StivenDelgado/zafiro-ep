@@ -5,7 +5,7 @@ import albumCover from "@/assets/axm-cover.jpg";
 
 const Hero = () => {
   return (
-    <section className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+    <section className="relative h-screen w-full overflow-hidden flex items-center justify-center snap-start">
       {/* Background with parallax */}
       <motion.div
         className="absolute inset-0 z-0"

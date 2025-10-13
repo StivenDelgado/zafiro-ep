@@ -18,10 +18,10 @@ const TrackSection = ({ title, duration, background, isActive, isPlaying, onTogg
     offset: ["start start", "end start"]
   });
 
-  // Parallax effect: move background slower than scroll
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1, 0.3]);
-  const contentScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1, 0.95]);
+  // Parallax effect: move background slower than scroll (more subtle)
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 1, 0.5]);
+  const contentScale = useTransform(scrollYProgress, [0, 0.7, 1], [1, 1, 0.98]);
 
   return (
     <section 
