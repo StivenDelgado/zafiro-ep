@@ -65,24 +65,26 @@ const Index = () => {
 
 
   return (
-    <div className="scroll-smooth snap-y snap-mandatory h-screen overflow-y-auto">
-      <Hero />
-      
-      {tracks.map((track, index) => (
-        <div
-          key={track.title}
-          ref={(el) => (trackRefs.current[index] = el)}
-        >
-          <TrackSection
-            title={track.title}
-            duration={track.duration}
-            background={track.background}
-            isActive={activeTrackIndex === index}
-            isPlaying={isPlaying && activeTrackIndex === index}
-            onTogglePlay={() => handleTogglePlay(index)}
-          />
-        </div>
-      ))}
+    <div className="scroll-smooth">
+      <div className="snap-y snap-mandatory h-screen overflow-y-auto">
+        <Hero />
+        
+        {tracks.map((track, index) => (
+          <div
+            key={track.title}
+            ref={(el) => (trackRefs.current[index] = el)}
+          >
+            <TrackSection
+              title={track.title}
+              duration={track.duration}
+              background={track.background}
+              isActive={activeTrackIndex === index}
+              isPlaying={isPlaying && activeTrackIndex === index}
+              onTogglePlay={() => handleTogglePlay(index)}
+            />
+          </div>
+        ))}
+      </div>
 
       <BehindTheAlbum />
       <CTASection />
