@@ -1,13 +1,17 @@
 import { motion } from "framer-motion";
-import behind1 from "@/assets/behind-1.jpg";
-import behind2 from "@/assets/behind-2.jpg";
-import behind3 from "@/assets/behind-3.jpg";
+import studio1 from "@/assets/behind-studio-1.jpg";
+import studio2 from "@/assets/behind-studio-2.jpg";
+import studio3 from "@/assets/behind-studio-3.jpg";
+import studio4 from "@/assets/behind-studio-4.jpg";
+import studio5 from "@/assets/behind-studio-5.jpg";
 
 const BehindTheAlbum = () => {
   const images = [
-    { src: behind1, alt: "Proceso de producción" },
-    { src: behind2, alt: "Inspiración urbana" },
-    { src: behind3, alt: "Visión artística" },
+    { src: studio1, alt: "Sesión de grabación", className: "col-span-2 row-span-2" },
+    { src: studio2, alt: "Escribiendo letras", className: "col-span-1 row-span-1" },
+    { src: studio3, alt: "Producción musical", className: "col-span-1 row-span-2" },
+    { src: studio4, alt: "Waveforms", className: "col-span-2 row-span-1" },
+    { src: studio5, alt: "En cabina", className: "col-span-1 row-span-1" },
   ];
 
   return (
@@ -21,46 +25,45 @@ const BehindTheAlbum = () => {
           className="text-center mb-16"
         >
           <h2 className="font-display text-5xl md:text-6xl font-bold tracking-tighter mb-6 text-foreground">
-            BEHIND THE ALBUM
+            DETRÁS DE ZAFIRO
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto font-sans leading-relaxed">
-            AXM nace de las calles, de la noche, de la búsqueda incansable por un sonido que capture 
-            la esencia del momento. Cada track es una ventana a una narrativa cinematográfica donde 
-            el beats y las melodías se funden con historias urbanas. Un viaje sonoro que trasciende 
-            fronteras y conecta con lo más profundo de la experiencia humana.
+            ZAFIRO nace de la noche, de sesiones infinitas en el estudio donde el arte cobra vida. 
+            Cada track es una gema pulida con dedicación, donde los beats y las melodías se cristalizan 
+            en un sonido único. Un proceso íntimo que captura la esencia de la creación musical.
           </p>
         </motion.div>
 
-        {/* Gallery */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Collage Gallery */}
+        <div className="grid grid-cols-3 md:grid-cols-4 auto-rows-[200px] gap-4">
           {images.map((image, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              initial={{ opacity: 0, scale: 0.9, rotate: index % 2 === 0 ? -2 : 2 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-              className="relative aspect-square rounded-lg overflow-hidden group cursor-pointer"
+              whileHover={{ scale: 1.02, rotate: index % 2 === 0 ? 1 : -1, zIndex: 10 }}
+              className={`relative rounded-lg overflow-hidden group cursor-pointer shadow-elegant ${image.className}`}
             >
               <img
                 src={image.src}
                 alt={image.alt}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-                className="absolute inset-0 flex items-center justify-center"
-              >
-                <div 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ 
-                    boxShadow: 'inset 0 0 60px rgba(166, 20, 32, 0.4)',
-                  }}
-                />
-              </motion.div>
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent opacity-50 group-hover:opacity-30 transition-opacity duration-300" />
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ 
+                  boxShadow: 'inset 0 0 60px hsl(var(--primary) / 0.4)',
+                }}
+              />
+              {/* Label */}
+              <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <p className="text-foreground font-display text-sm tracking-wider">
+                  {image.alt.toUpperCase()}
+                </p>
+              </div>
             </motion.div>
           ))}
         </div>
