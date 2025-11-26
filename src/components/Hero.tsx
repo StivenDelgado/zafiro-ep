@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Music2, Play } from "lucide-react";
-import albumCover from "@/assets/axm-cover.jpg";
+import albumCover from "@/assets/zafiro-cover.jpg";
 
 const Hero = () => {
   return (
@@ -37,7 +37,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="font-display text-8xl md:text-9xl font-bold tracking-tighter mb-4 text-foreground"
         >
-          AXM
+          ZAFIRO
         </motion.h1>
 
         <motion.p
