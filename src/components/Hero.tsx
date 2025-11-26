@@ -17,7 +17,7 @@ const Hero = () => {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${albumCover})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-background/60 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/30 to-background/80" />
       </motion.div>
 
       {/* Content */}
