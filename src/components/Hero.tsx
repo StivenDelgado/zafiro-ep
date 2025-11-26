@@ -14,10 +14,10 @@ const Hero = () => {
         transition={{ duration: 1.5, ease: "easeOut" }}
       >
         <div 
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-contain bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${albumCover})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/30 to-background/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
       </motion.div>
 
       {/* Content */}
