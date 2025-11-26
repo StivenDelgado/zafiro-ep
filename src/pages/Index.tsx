@@ -6,14 +6,12 @@ import BehindTheAlbum from "@/components/BehindTheAlbum";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 
-import axm1Bg from "@/assets/axm-1-bg.jpg";
-import axm2Bg from "@/assets/axm-2-bg.jpg";
-import axm3Bg from "@/assets/axm-3-bg.jpg";
-import axm4Bg from "@/assets/axm-4-bg.jpg";
+import track1Bg from "@/assets/track-1-bg.jpg";
+import track2Bg from "@/assets/track-2-bg.jpg";
 
 const tracks = [
-  { title: "ZAFIRO I", duration: "3:21", background: axm1Bg },
-  { title: "ZAFIRO II", duration: "4:05", background: axm2Bg },
+  { title: "ROSAS EN LA TINA", duration: "3:21", background: track1Bg },
+  { title: "BOTTEGA VENETA", duration: "4:05", background: track2Bg },
 ];
 
 const Index = () => {
