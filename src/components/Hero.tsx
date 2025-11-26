@@ -8,7 +8,7 @@ const Hero = () => {
     <section className="relative h-screen w-full overflow-hidden flex items-center justify-center snap-start">
       {/* Background with parallax */}
       <motion.div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 bg-black"
         initial={{ scale: 1.1 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -17,7 +17,7 @@ const Hero = () => {
           className="absolute inset-0 bg-contain bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${albumCover})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
       </motion.div>
 
       {/* Content */}
