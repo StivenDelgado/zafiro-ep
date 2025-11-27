@@ -1,9 +1,93 @@
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Music2, Play } from "lucide-react";
+import { Play } from "lucide-react";
 import albumCover from "@/assets/zafiro-cover.jpg";
 
+const BOGOTA_OFFSET_MS = 5 * 60 * 60 * 1000; // UTC-5
+const RELEASE_WEEKDAY = 6; // Saturday
+const RELEASE_HOUR = 16; // 4 PM
+
+interface Countdown {
+  days: string;
+  hours: string;
+  minutes: string;
+  seconds: string;
+}
+
+const getNextReleaseDate = () => {
+  const now = new Date();
+  const bogotaNow = new Date(now.getTime() - BOGOTA_OFFSET_MS);
+  const target = new Date(bogotaNow);
+  const currentDay = target.getUTCDay();
+  let daysToAdd = (RELEASE_WEEKDAY - currentDay + 7) % 7;
+
+  if (daysToAdd === 0 && target.getUTCHours() >= RELEASE_HOUR) {
+    daysToAdd = 7;
+  }
+
+  target.setUTCDate(target.getUTCDate() + daysToAdd);
+  target.setUTCHours(RELEASE_HOUR, 0, 0, 0);
+
+  return new Date(target.getTime() + BOGOTA_OFFSET_MS);
+};
+
+const getCountdownValues = (releaseDate: Date): Countdown => {
+  const diff = Math.max(0, releaseDate.getTime() - Date.now());
+  const totalSeconds = Math.floor(diff / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+
+  const pad = (value: number) => value.toString().padStart(2, "0");
+
+  return {
+    days: pad(days),
+    hours: pad(hours),
+    minutes: pad(minutes),
+    seconds: pad(seconds),
+  };
+};
+
 const Hero = () => {
+  const [releaseDate, setReleaseDate] = useState<Date>(() => getNextReleaseDate());
+  const [countdown, setCountdown] = useState<Countdown>(() => getCountdownValues(releaseDate));
+
+  useEffect(() => {
+    const updateCountdown = () => {
+      const diff = releaseDate.getTime() - Date.now();
+
+      if (diff <= 0) {
+        const nextRelease = getNextReleaseDate();
+        setReleaseDate(nextRelease);
+        setCountdown(getCountdownValues(nextRelease));
+        return;
+      }
+
+      setCountdown(getCountdownValues(releaseDate));
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+    return () => clearInterval(interval);
+  }, [releaseDate]);
+
+  const releaseLabel = useMemo(
+    () =>
+      releaseDate
+        .toLocaleDateString("es-CO", {
+          timeZone: "America/Bogota",
+          weekday: "long",
+          day: "numeric",
+          month: "long",
+        })
+        .toUpperCase(),
+    [releaseDate]
+  );
+
+  const countdownDisplay = `${countdown.days} : ${countdown.hours} : ${countdown.minutes} : ${countdown.seconds}`;
+
   return (
     <section className="relative h-screen w-full overflow-hidden flex items-center justify-center snap-start">
       {/* Background with parallax */}
@@ -22,14 +106,6 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="mb-6"
-        >
-          <Music2 className="w-16 h-16 mx-auto mb-4 text-primary" />
-        </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -86,7 +162,15 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 1.2 }}
           className="font-display text-4xl font-bold text-primary mt-2"
         >
-          12 : 05 : 30
+          {countdownDisplay}
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.3 }}
+          className="text-xs uppercase tracking-[0.4em] text-muted-foreground mt-4"
+        >
+          {releaseLabel} · 4:00 PM (COT)
         </motion.div>
 
         {/* Streaming platforms */}
