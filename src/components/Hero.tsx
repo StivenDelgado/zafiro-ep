@@ -6,7 +6,7 @@ import albumCover from "@/assets/zafiro-cover.jpg";
 
 const BOGOTA_OFFSET_MS = 5 * 60 * 60 * 1000; // UTC-5
 const RELEASE_WEEKDAY = 6; // Saturday
-const RELEASE_HOUR = 19; // 7 PM
+const RELEASE_HOUR = 20; // 8 PM
 
 interface Countdown {
   days: string;
